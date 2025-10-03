@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Panel de Administración{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Gestión de Usuarios</h2>
+    <a href="{{ url_for('create_user') }}" class="btn btn-success">Agregar Usuario</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if users %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user[0] }}</td>
+                        <td>{{ user[1] }}</td>
+                        <td>{{ user[2] }}</td>
+                        <td>
+                            <span class="badge bg-{{ 'primary' if user[3] == 'admin' else 'secondary' }}">
+                                {{ user[3] }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('edit_user', user_id=user[0]) }}" class="btn btn-sm btn-warning">Editar</a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ user[0] }}">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Modal de confirmación para eliminar -->
+                    <div class="modal fade" id="deleteModal{{ user[0] }}" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Está seguro que desea eliminar al usuario <strong>{{ user[1] }}</strong>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <form method="POST" action="{{ url_for('delete_user', user_id=user[0]) }}" style="display: inline;">
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-4">
+            <p class="text-muted">No hay usuarios registrados.</p>
+            <a href="{{ url_for('create_user') }}" class="btn btn-primary">Crear Primer Usuario</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
