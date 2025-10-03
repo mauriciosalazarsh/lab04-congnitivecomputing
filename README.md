@@ -1,6 +1,4 @@
-# Lab04 - Sistema de Gestión de Usuarios
-
-Laboratorio de Flask con MySQL para el curso de Cognitive Computing.
+# Lab04 
 
 ## Qué hace la aplicación
 
@@ -23,7 +21,7 @@ Lab04/
     └── edit_user.html   # Editar usuario
 ```
 
-## Cómo instalarlo
+## Cómo instalarlo para MacOS
 
 ### 1. Instalar MySQL
 ```bash
