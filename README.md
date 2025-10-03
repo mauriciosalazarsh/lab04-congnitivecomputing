@@ -86,6 +86,6 @@ Usa MySQL con 2 tablas:
 
 ## Si algo no funciona
 
-- Revisa que MySQL esté corriendo: `brew services start mysql`
-- Si tienes contraseña en MySQL, cámbiala en `app.py` línea 13
+- Revisar que MySQL esté corriendo: `brew services start mysql`
+- Si tiene contraseña en MySQL, cámbiela en `app.py` línea 13
 - Si el puerto está ocupado, la app usa 5001 automáticamente
